@@ -9,7 +9,7 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-2.5.xsd
     http://www.springframework.org/schema/mvc 
-    http://www.springframework.org/schema/mvc/spring-mvc-2.5.xsd">
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<!-- the application context definition for the hotelapp DispatcherServlet -->
 
@@ -31,6 +31,10 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="priceIncreaseFormController" class="hotelapp.web.PriceIncreaseFormController" autowire="byName"></bean>
+	
+	<bean id="priceIncreaseValidator" class="hotelapp.service.PriceIncreaseValidator"></bean>
 
 	<bean id="room1" class="hotelapp.domain.Room">
 		<property name="roomNumber" value="1" />

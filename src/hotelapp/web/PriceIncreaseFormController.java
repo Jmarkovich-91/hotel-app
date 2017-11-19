@@ -31,8 +31,8 @@ public class PriceIncreaseFormController {
             BindingResult result)
             throws ServletException {
 
-        int increase = priceIncrease.getPercentage(); 
-        priceIncreaseValidator.validate(increase, result); 
+        //int increase = priceIncrease.getPercentage(); 
+        priceIncreaseValidator.validate(priceIncrease, result); 
         if (result.hasErrors()) 
             return "priceIncrease"; 
            
@@ -50,6 +50,7 @@ public class PriceIncreaseFormController {
         priority.put(3, "High");
   
         model.addAttribute("priorityList", priority);
+        model.addAttribute("priceIncrease", new PriceIncrease());
    
         return "priceincrease"; 
     } 
