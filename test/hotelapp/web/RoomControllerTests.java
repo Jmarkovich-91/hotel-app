@@ -1,19 +1,24 @@
 package hotelapp.web;
 
+import java.util.Map;
+
 import org.springframework.web.servlet.ModelAndView;
 
-import hotelapp.web.HelloController;
+import hotelapp.web.RoomController;
+import hotelapp.service.SimpleRoomManager;
 
 import junit.framework.TestCase;
 
-public class HelloControllerTests extends TestCase {
+public class RoomControllerTests extends TestCase {
 
     public void testHandleRequestView() throws Exception{		
-        HelloController controller = new HelloController();
+        RoomController controller = new RoomController();
+        controller.setRoomManager(new SimpleRoomManager());
         ModelAndView modelAndView = controller.handleRequest(null, null);		
         assertEquals("hello", modelAndView.getViewName());
         assertNotNull(modelAndView.getModel());
-        String nowValue = (String) modelAndView.getModel().get("now");
+        Map modelMap = (Map) modelAndView.getModel().get("model");
+        String nowValue = (String) modelMap.get("now");
         assertNotNull(nowValue);
     }
 }

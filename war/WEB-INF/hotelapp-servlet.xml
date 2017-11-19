@@ -1,18 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd
+    http://www.springframework.org/schema/mvc 
+    http://www.springframework.org/schema/mvc/spring-mvc-2.5.xsd">
 
-  <!-- the application context definition for the hotelapp DispatcherServlet -->
+	<!-- the application context definition for the hotelapp DispatcherServlet -->
 
-  <bean name="/hello.htm" class="hotelapp.web.HelloController"/>
-  
-   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
-        <property name="prefix" value="/WEB-INF/jsp/"></property>
-        <property name="suffix" value=".jsp"></property>        
-    </bean>
+	<!-- Scans within the base package of the application for @Components to 
+		configure as beans -->
+	<!-- @Controller, @Service, @Configuration, etc. -->
+	<context:component-scan base-package="hotelapp.web" />
+	<context:annotation-config/>
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<mvc:annotation-driven/>
+
+	<bean id="roomManager" class="hotelapp.service.SimpleRoomManager">
+		<property name="rooms">
+			<list>
+				<ref bean="room1" />
+				<ref bean="room2" />
+				<ref bean="room3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="room1" class="hotelapp.domain.Room">
+		<property name="roomNumber" value="1" />
+		<property name="type" value="Suite" />
+		<property name="price" value="149.99" />
+		<property name="booked" value="false" />
+	</bean>
+
+	<bean id="room2" class="hotelapp.domain.Room">
+		<property name="roomNumber" value="2" />
+		<property name="type" value="Suite" />
+		<property name="price" value="139.99" />
+		<property name="booked" value="false" />
+	</bean>
+
+	<bean id="room3" class="hotelapp.domain.Room">
+		<property name="roomNumber" value="3" />
+		<property name="type" value="Master Suite" />
+		<property name="price" value="179.99" />
+		<property name="booked" value="true" />
+	</bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
+
+	<bean name="/hello.htm" class="hotelapp.web.RoomController">
+		<property name="roomManager" ref="roomManager" />
+	</bean>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView"></property>
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
 
 </beans>
