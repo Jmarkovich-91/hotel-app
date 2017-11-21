@@ -13,6 +13,7 @@ public class SimpleRoomManagerTests extends TestCase{
 	private List<Room> rooms;
 	
 	private static int ROOM_COUNT = 2;
+	private static int AVAILABLE_ROOM_COUNT = 1;
 	
 	private static String SUITE_ROOM_NUMBER = "1";
 	private static String SUITE_TYPE = "Suite";
@@ -102,6 +103,21 @@ public class SimpleRoomManagerTests extends TestCase{
         
         room = rooms.get(1);      
         assertEquals(expectedAccessiblePriceWithIncrease, room.getPrice());       
+    }
+    
+    public void testGetAvailableRooms() {
+    	List<Room> rooms = roomManager.getAvailableRooms();
+		assertNotNull(rooms);
+		assertEquals(AVAILABLE_ROOM_COUNT, roomManager.getAvailableRooms().size());
+		
+		Room room = rooms.get(0);
+		assertEquals(ACCESSIBLE_ROOM_NUMBER, room.getRoomNumber());
+    }
+    
+    public void testBookRoom() {
+    	List<Room> rooms = roomManager.getRooms();
+    	roomManager.bookRoom(rooms.get(1));
+    	assertEquals(true, rooms.get(1).getBooked());
     }
 
 }

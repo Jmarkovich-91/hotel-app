@@ -28,10 +28,16 @@ public class SimpleRoomManager implements RoomManager{
 	}
 	
 	public void bookRoom (Room room) {
-		throw new UnsupportedOperationException();
+		room.setBooked(true);
 	}
 	
 	public List<Room> getAvailableRooms() {
-		throw new UnsupportedOperationException();
+		List<Room> availableRooms = new ArrayList<Room>();
+		for (Room room : rooms) {
+			if (!room.getBooked()){
+				availableRooms.add(room);
+			}
+		}
+		return availableRooms;
 	}
 }
