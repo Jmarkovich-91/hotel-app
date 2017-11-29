@@ -6,7 +6,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/spring-core-5.0.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/spring-webmvc-5.0.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="/springapp/war/WEB-INF/lib/aspectjweaver-1.6.2.jar"/>
-	<classpathentry kind="lib" path="/springapp/war/WEB-INF/lib/commons-dbcp2-2.1.1.jar"/>
 	<classpathentry kind="lib" path="/springapp/war/WEB-INF/lib/commons-logging-1.2.jar"/>
 	<classpathentry kind="lib" path="/springapp/war/WEB-INF/lib/hsqldb.jar"/>
 	<classpathentry kind="lib" path="/springapp/war/WEB-INF/lib/jstl-1.2.jar"/>
@@ -23,5 +22,8 @@
 	<classpathentry kind="lib" path="/springapp/war/WEB-INF/lib/spring-webmvc-5.0.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="/springapp/war/WEB-INF/lib/standard-1.1.2.jar"/>
 	<classpathentry kind="lib" path="/Users/Josh/apache-tomcat-8.5.23/lib/servlet-api.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/Users/Josh/Documents/jars/commons-pool-1.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/Josh/Documents/jars/commons-dbcp-1.2.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

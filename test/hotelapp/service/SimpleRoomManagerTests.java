@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hotelapp.domain.Room;
+import hotelapp.repository.RoomDao;
+import hotelapp.repository.InMemoryRoomDao;
 
 public class SimpleRoomManagerTests extends TestCase{
 	
@@ -45,11 +47,14 @@ public class SimpleRoomManagerTests extends TestCase{
 		room.setBooked(ACCESSIBLE_BOOKED);
 		rooms.add(room);
 		
-		roomManager.setRooms(rooms);
+		RoomDao roomDao = new InMemoryRoomDao(rooms);
+        roomManager.setRoomDao(roomDao);
+		//roomManager.setRooms(rooms);
 	}
 	
 	public void testGetRoomsWithNoRooms () {
 		roomManager = new SimpleRoomManager();
+		roomManager.setRoomDao(new InMemoryRoomDao(null));
 		assertNull (roomManager.getRooms());
 	}
 	
@@ -74,6 +79,7 @@ public class SimpleRoomManagerTests extends TestCase{
     public void testIncreasePriceWithNullListOfRooms() {
         try {
             roomManager = new SimpleRoomManager();
+            roomManager.setRoomDao(new InMemoryRoomDao(null));
             roomManager.increasePrice(POSITIVE_PRICE_INCREASE);
         }
         catch(NullPointerException ex) {
@@ -84,7 +90,8 @@ public class SimpleRoomManagerTests extends TestCase{
     public void testIncreasePriceWithEmptyListOfRooms() {
         try {
         	roomManager = new SimpleRoomManager();
-        	roomManager.setRooms(new ArrayList<Room>());
+        	roomManager.setRoomDao(new InMemoryRoomDao(new ArrayList<Room>()));
+        	//roomManager.setRooms(new ArrayList<Room>());
         	roomManager.increasePrice(POSITIVE_PRICE_INCREASE);
         }
         catch(Exception ex) {
