@@ -29,7 +29,7 @@ public class JdbcRoomDao extends JdbcDaoSupport implements RoomDao {
     public void saveRoom(Room room) {
         logger.info("Saving room: " + room.getRoomNumber());
         int count = getJdbcTemplate().update(
-            "update rooms set type = :type, price = :price, booked = :booked where room_number = :room_number",
+            "update rooms set type=:type, price=:price, booked=:booked where room_number=:room_number",
             new MapSqlParameterSource().addValue("type", room.getType())
             	.addValue("price", room.getPrice())
                 .addValue("booked", room.getBooked())

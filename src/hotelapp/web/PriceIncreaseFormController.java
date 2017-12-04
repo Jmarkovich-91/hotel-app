@@ -31,11 +31,12 @@ public class PriceIncreaseFormController {
             BindingResult result)
             throws ServletException {
 
-        //int increase = priceIncrease.getPercentage(); 
+        int increase = priceIncrease.getPercentage();
         priceIncreaseValidator.validate(priceIncrease, result); 
         if (result.hasErrors()) 
-            return "priceIncrease"; 
+            return "priceincrease"; 
            
+        roomManager.increasePrice(increase);
         // Validator has succeeded. 
         // Perform necessary actions and return to success page. 
         return "redirect:hello.htm"; 
