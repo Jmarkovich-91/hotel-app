@@ -7,20 +7,30 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import hotelapp.domain.Room;
 
-public class JdbcRoomDao extends JdbcDaoSupport implements RoomDao {
+public class JdbcRoomDao implements RoomDao {
 	
     /** Logger for this class and subclasses */
     protected final Log logger = LogFactory.getLog(getClass());
+    
+    private NamedParameterJdbcTemplate namedJdbcTemplate;
+    
+    public NamedParameterJdbcTemplate getNamedJdbcTemplate() {
+    	return namedJdbcTemplate;
+    }
+    
+    public void setNamedJdbcTemplate(NamedParameterJdbcTemplate namedJdbcTemplate) {
+    	this.namedJdbcTemplate = namedJdbcTemplate;
+    }
 
 
     public List<Room> getRoomList() {
         logger.info("Getting rooms!");
-        List<Room> rooms = getJdbcTemplate().query(
+        List<Room> rooms = namedJdbcTemplate.query(
                 "select room_number, type, price, booked from rooms", 
                 new RoomMapper());
         return rooms;
@@ -28,7 +38,7 @@ public class JdbcRoomDao extends JdbcDaoSupport implements RoomDao {
 
     public void saveRoom(Room room) {
         logger.info("Saving room: " + room.getRoomNumber());
-        int count = getJdbcTemplate().update(
+        int count = namedJdbcTemplate.update(
             "update rooms set type=:type, price=:price, booked=:booked where room_number=:room_number",
             new MapSqlParameterSource().addValue("type", room.getType())
             	.addValue("price", room.getPrice())

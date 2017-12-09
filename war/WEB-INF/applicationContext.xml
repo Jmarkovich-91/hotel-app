@@ -17,7 +17,11 @@
 	</bean>
 
 	<bean id="roomDao" class="hotelapp.repository.JdbcRoomDao">
-		<property name="dataSource" ref="dataSource" />
+		<property name="namedJdbcTemplate" ref="namedJdbcTemplate" />
+	</bean>
+	
+	<bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg ref="dataSource"></constructor-arg>
 	</bean>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -50,6 +54,7 @@
 	<tx:advice id="txAdvice">
 		<tx:attributes>
 			<tx:method name="save*" />
+			<tx:method name="increase*" read-only="false"/>
 			<tx:method name="*" read-only="true" />
 		</tx:attributes>
 	</tx:advice>
