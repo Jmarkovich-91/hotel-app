@@ -36,8 +36,9 @@ public class SimpleRoomManager implements RoomManager{
 		this.roomDao = roomDao;
 	}
 	
-	public void bookRoom (Room room) {
-		room.setBooked(true);
+	public void bookRoom (String roomNumber) {
+		//room.setBooked(true);
+		roomDao.bookRoom(roomNumber);
 	}
 	
 	public List<Room> getAvailableRooms() {

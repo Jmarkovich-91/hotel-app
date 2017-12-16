@@ -123,7 +123,7 @@ public class SimpleRoomManagerTests extends TestCase{
     
     public void testBookRoom() {
     	List<Room> rooms = roomManager.getRooms();
-    	roomManager.bookRoom(rooms.get(1));
+    	roomManager.bookRoom(rooms.get(1).getRoomNumber());
     	assertEquals(true, rooms.get(1).getBooked());
     }
 

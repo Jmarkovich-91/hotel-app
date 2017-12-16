@@ -47,6 +47,10 @@ public class JdbcRoomDao implements RoomDao {
         logger.info("Rows affected: " + count);
     }
     
+    public void bookRoom(String roomNumber) {
+    	throw new UnsupportedOperationException();
+    }
+    
     private static class RoomMapper implements RowMapper<Room> {
 
         public Room mapRow(ResultSet rs, int rowNum) throws SQLException {

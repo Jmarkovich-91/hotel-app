@@ -19,5 +19,9 @@ public class InMemoryRoomDao implements RoomDao {
 	public void saveRoom(Room room) {
 
 	}
+	
+	public void bookRoom(String roomNumber) {
+		
+	}
 
 }

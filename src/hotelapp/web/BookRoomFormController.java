@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+
 import hotelapp.service.BookRoom;
 import hotelapp.service.RoomManager;
 
@@ -23,20 +25,24 @@ public class BookRoomFormController {
 	private RoomManager roomManager;
 	
 	@RequestMapping(method=RequestMethod.POST) 
-	public String onSubmit(@ModelAttribute("bookRoom")BookRoom bookRoom) {
+	public String onSubmit(@ModelAttribute("bookRoom")BookRoom bookRoom,
+			BindingResult result) throws ServletException {
 		
-		
+		roomManager.bookRoom(bookRoom.getRoomNumber());
 		return "redirect:hello.htm"; 
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView initializeForm() {
+	public ModelAndView initializeForm(ModelMap model) {
 		
 		Map<String, Object> myModel = new HashMap<String, Object>();
         myModel.put("availableRooms", this.roomManager.getAvailableRooms());
+        
+        model.addAttribute("bookRoom", new BookRoom());
 		
 		return new ModelAndView("bookroom", "model", myModel);
 	}
+
 	
     public void setRoomManager(RoomManager roomManager) {
         this.roomManager = roomManager;

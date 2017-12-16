@@ -11,7 +11,7 @@ public interface RoomManager extends Serializable{
 	
 	public List<Room> getRooms();
 	
-	public void bookRoom (Room room);
+	public void bookRoom (String roomNumber);
 	
 	public List<Room> getAvailableRooms();
 }

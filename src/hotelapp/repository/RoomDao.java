@@ -9,5 +9,7 @@ public interface RoomDao {
 	public List<Room> getRoomList();
 	
 	public void saveRoom (Room room);
+	
+	public void bookRoom (String roomNumber);
 
 }
