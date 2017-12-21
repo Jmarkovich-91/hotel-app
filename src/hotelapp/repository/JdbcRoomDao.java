@@ -48,7 +48,11 @@ public class JdbcRoomDao implements RoomDao {
     }
     
     public void bookRoom(String roomNumber) {
-    	throw new UnsupportedOperationException();
+    	logger.info("Booking room: " + roomNumber);
+    	int count = namedJdbcTemplate.update(
+    			"update rooms set booked='true' where room_number=:roomNumber",
+    			new MapSqlParameterSource().addValue("roomNumber", roomNumber));
+    	logger.info("Rows affected: " + count);
     }
     
     private static class RoomMapper implements RowMapper<Room> {
