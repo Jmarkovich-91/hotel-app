@@ -15,20 +15,28 @@ import java.util.Map;
 import javax.servlet.ServletException;
 
 import hotelapp.service.BookRoom;
+import hotelapp.service.BookRoomValidator;
 import hotelapp.service.RoomManager;
 
 @Controller
 @RequestMapping("/bookroom.htm")
 public class BookRoomFormController {
 	
-	@Autowired
 	private RoomManager roomManager;
+	
+	@Autowired
+	private BookRoomValidator bookRoomValidator;
 	
 	@RequestMapping(method=RequestMethod.POST) 
 	public String onSubmit(@ModelAttribute("bookRoom")BookRoom bookRoom,
 			BindingResult result) throws ServletException {
 		
-		roomManager.bookRoom(bookRoom.getRoomNumber());
+		String roomNumber = bookRoom.getRoomNumber();
+		//bookRoomValidator.validate(bookRoom, result);
+		if (result.hasErrors())
+			return "bookroom";
+		
+		roomManager.bookRoom(roomNumber);
 		return "redirect:hello.htm"; 
 	}
 	

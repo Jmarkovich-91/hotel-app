@@ -25,6 +25,10 @@
 	<bean id="priceIncreaseFormController" class="hotelapp.web.PriceIncreaseFormController" autowire="byName"></bean>
 	
 	<bean id="priceIncreaseValidator" class="hotelapp.service.PriceIncreaseValidator"></bean>
+	
+	<bean id="bookRoomFormController" class="hotelapp.web.BookRoomFormController" autowire="byName"></bean>
+	
+	<bean id="bookRoomValidator" class="hotelapp.service.BookRoomValidator"></bean>
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">

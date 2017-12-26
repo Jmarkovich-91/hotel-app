@@ -35,6 +35,14 @@ public class JdbcRoomDao implements RoomDao {
                 new RoomMapper());
         return rooms;
     }
+    
+    public List<Room> getAvailableRoomList() {
+    	logger.info("Getting available rooms!");
+        List<Room> rooms = namedJdbcTemplate.query(
+                "select room_number, type, price, booked from rooms where booked='false'", 
+                new RoomMapper());
+        return rooms;
+    }
 
     public void saveRoom(Room room) {
         logger.info("Saving room: " + room.getRoomNumber());

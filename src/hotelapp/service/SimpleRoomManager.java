@@ -8,7 +8,6 @@ import hotelapp.repository.RoomDao;
 
 public class SimpleRoomManager implements RoomManager{
 	
-	//private List<Room> rooms;
 	private RoomDao roomDao;
 
 	public void increasePrice (int percentage) {
@@ -24,31 +23,18 @@ public class SimpleRoomManager implements RoomManager{
 	}
 	
 	public List<Room> getRooms() {
-		//return rooms;
 		return roomDao.getRoomList();
 	}
-	
-//	public void setRooms (List<Room> rooms) {
-//		this.rooms = rooms;
-//	}
 	
 	public void setRoomDao (RoomDao roomDao) {
 		this.roomDao = roomDao;
 	}
 	
 	public void bookRoom (String roomNumber) {
-		//room.setBooked(true);
 		roomDao.bookRoom(roomNumber);
 	}
 	
 	public List<Room> getAvailableRooms() {
-		List<Room> availableRooms = new ArrayList<Room>();
-		List<Room> rooms = roomDao.getRoomList();
-		for (Room room : rooms) {
-			if (!room.getBooked()){
-				availableRooms.add(room);
-			}
-		}
-		return availableRooms;
+		return roomDao.getAvailableRoomList();
 	}
 }

@@ -15,13 +15,17 @@ public class InMemoryRoomDao implements RoomDao {
 	public List<Room> getRoomList() {
 		return roomList;
 	}
+	
+	public List<Room> getAvailableRoomList() {
+		throw new UnsupportedOperationException();
+	}
 
 	public void saveRoom(Room room) {
-
+		throw new UnsupportedOperationException();
 	}
 	
 	public void bookRoom(String roomNumber) {
-		
+		throw new UnsupportedOperationException();
 	}
 
 }

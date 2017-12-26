@@ -12,6 +12,10 @@
 
 	<!-- the parent application context definition for the hotelapp application -->
 
+	<bean id="bookRoomValidator" class="hotelapp.service.BookRoomValidator">
+		<property name="roomManager" ref="roomManager" />
+	</bean>
+		
 	<bean id="roomManager" class="hotelapp.service.SimpleRoomManager">
 		<property name="roomDao" ref="roomDao" />
 	</bean>
