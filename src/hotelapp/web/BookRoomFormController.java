@@ -32,7 +32,7 @@ public class BookRoomFormController {
 			BindingResult result) throws ServletException {
 		
 		String roomNumber = bookRoom.getRoomNumber();
-		//bookRoomValidator.validate(bookRoom, result);
+		bookRoomValidator.validate(bookRoom, result);
 		if (result.hasErrors())
 			return "bookroom";
 		

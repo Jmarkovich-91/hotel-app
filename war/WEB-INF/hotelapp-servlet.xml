@@ -28,7 +28,9 @@
 	
 	<bean id="bookRoomFormController" class="hotelapp.web.BookRoomFormController" autowire="byName"></bean>
 	
-	<bean id="bookRoomValidator" class="hotelapp.service.BookRoomValidator"></bean>
+	<bean id="bookRoomValidator" class="hotelapp.service.BookRoomValidator">
+		<property name="roomManager" ref="roomManager" />	
+	</bean>
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
