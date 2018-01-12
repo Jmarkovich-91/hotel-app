@@ -110,7 +110,7 @@
         </fail>
 	</target>
 
-	<target name="dbTests" depends="build, buildtests,dropTables,createTables,loadData" description="Run db tests">
+	<target name="dbTests" depends="build, buildtests,dropTables,createTables,loadData, createCustomerTable, loadCustomerData" description="Run db tests">
 		<junit printsummary="on" fork="false" haltonfailure="false" failureproperty="tests.failed" showoutput="true">
 			<classpath refid="test-classpath" />
 			<formatter type="brief" usefile="false" />
@@ -155,6 +155,13 @@
 			<classpath refid="master-classpath" />
 		</sql>
 	</target>
+	
+	<target name="createCustomerTable">
+			<echo message="CREATE CUSTOMER TABLE USING: ${db.driver} ${db.url}" />
+			<sql driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.pw}" onerror="continue" src="db/create_customers.sql">
+				<classpath refid="master-classpath" />
+			</sql>
+		</target>
 
 	<target name="dropTables">
 		<echo message="DROP TABLES USING: ${db.driver} ${db.url}" />
@@ -162,6 +169,7 @@
 			<classpath refid="master-classpath" />
 
 	        DROP TABLE rooms;
+			DROP TABLE customers;
 
 	        </sql>
 	</target>
@@ -172,6 +180,13 @@
 			<classpath refid="master-classpath" />
 		</sql>
 	</target>
+	
+	<target name="loadCustomerData">
+		<echo message="LOAD DATA USING: ${db.driver} ${db.url}" />
+		<sql driver="${db.driver}" url="${db.url}" userid="${db.user}" password="${db.pw}" onerror="continue" src="db/load_customer_data.sql">
+			<classpath refid="master-classpath" />
+		</sql>
+	</target>
 
 	<target name="printData">
 		<echo message="PRINT DATA USING: ${db.driver} ${db.url}" />
@@ -179,6 +194,7 @@
 			<classpath refid="master-classpath" />
 
 	        SELECT * FROM rooms;
+			SELECT * FROM customers;
 
 	        </sql>
 	</target>
@@ -189,6 +205,7 @@
 			<classpath refid="master-classpath" />
 
 	        DELETE FROM rooms;
+			DELETE FROM customers;
 
 	        </sql>
 	</target>
