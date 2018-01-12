@@ -1,5 +1,6 @@
 package hotelapp.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import hotelapp.domain.Room;
@@ -7,6 +8,7 @@ import hotelapp.domain.Room;
 public class InMemoryRoomDao implements RoomDao {
 
 	private List<Room> roomList;
+	private List<Room> availableRooms;
 	
 	public InMemoryRoomDao (List<Room> roomList) {
 		this.roomList = roomList;
@@ -17,15 +19,31 @@ public class InMemoryRoomDao implements RoomDao {
 	}
 	
 	public List<Room> getAvailableRoomList() {
-		throw new UnsupportedOperationException();
+		availableRooms = new ArrayList<Room>();
+		for (Room room:roomList) {
+			if (room.getBooked() == false) {
+				availableRooms.add(room);
+			}
+		}
+		return availableRooms;
 	}
 
 	public void saveRoom(Room room) {
-		throw new UnsupportedOperationException();
+		for (Room rooms : roomList) {
+			if (rooms.equals(room)) {
+				rooms.setBooked(room.getBooked());
+				rooms.setPrice(room.getPrice());
+				rooms.setType(room.getType());
+			}
+		}
 	}
 	
 	public void bookRoom(String roomNumber) {
-		throw new UnsupportedOperationException();
+		for (Room room : roomList) {
+			if (room.getRoomNumber().equals(roomNumber)) {
+				room.setBooked(true);
+			}
+		}
 	}
 
 }
