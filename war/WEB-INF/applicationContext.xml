@@ -24,6 +24,14 @@
 		<property name="namedJdbcTemplate" ref="namedJdbcTemplate" />
 	</bean>
 	
+	<bean id="customerManager" class="hotelapp.service.SimpleCustomerManager">
+		<property name="customerDao" ref="customerDao" />
+	</bean>
+	
+	<bean id="customerDao" class="hotelapp.repository.JdbcCustomerDao">
+		<property name="namedJdbcTemplate" ref="namedJdbcTemplate" />
+	</bean>
+	
 	<bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
 		<constructor-arg ref="dataSource"></constructor-arg>
 	</bean>
@@ -60,6 +68,7 @@
 			<tx:method name="save*" />
 			<tx:method name="increase*" read-only="false"/>
 			<tx:method name="book*" read-only="false"/>
+			<tx:method name="add*" reado-only="false"/>
 			<tx:method name="*" read-only="true" />
 		</tx:attributes>
 	</tx:advice>
