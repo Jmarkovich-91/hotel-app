@@ -68,7 +68,7 @@
 			<tx:method name="save*" />
 			<tx:method name="increase*" read-only="false"/>
 			<tx:method name="book*" read-only="false"/>
-			<tx:method name="add*" reado-only="false"/>
+			<tx:method name="add*" read-only="false"/>
 			<tx:method name="*" read-only="true" />
 		</tx:attributes>
 	</tx:advice>

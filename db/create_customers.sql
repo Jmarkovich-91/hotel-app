@@ -1,5 +1,5 @@
 CREATE TABLE customers (
-  customer_id varchar(5) NOT NULL PRIMARY KEY,
+  customer_id integer identity NOT NULL PRIMARY KEY,
   last_name varchar(100),
   first_name varchar(100),
   email varchar(100),

@@ -40,10 +40,9 @@ public class JdbcCustomerDao implements CustomerDao {
 	public void addCustomer (Customer customer) {
 		logger.info("Adding customer: " + customer.getId());
 		int count = namedJdbcTemplate.update(
-				"insert into customers (customer_id, last_name, first_name, email, phone_number) "
-				+ "values (:customerId, :lastName, :firstName, :email, :phoneNumber)",
-				new MapSqlParameterSource().addValue("customerId", customer.getId())
-				.addValue("lastName", customer.getLastName())
+				"insert into customers (last_name, first_name, email, phone_number) "
+				+ "values (:lastName, :firstName, :email, :phoneNumber)",
+				new MapSqlParameterSource().addValue("lastName", customer.getLastName())
 				.addValue("firstName", customer.getFirstName())
 				.addValue("email", customer.getEmail())
 				.addValue("phoneNumber", customer.getPhoneNumber()));

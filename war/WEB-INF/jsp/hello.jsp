@@ -27,5 +27,7 @@
 	<br>
 	<a href="<c:url value="bookroom.htm"/>">Book a Room</a>
 	<br>
+	<br>
+	<a href="<c:url value="customerinfo.htm"/>">Customer Info</a>
 </body>
 </html>
