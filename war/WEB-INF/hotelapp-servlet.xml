@@ -33,6 +33,10 @@
 	</bean>
 	
 	<bean id="customerInfoFormController" class="hotelapp.web.CustomerInfoFormController" autowire="byName"></bean>
+	
+	<bean id="customerInfoValidator" class="hotelapp.service.CustomerInfoValidator">
+		<property name="customerManager" ref="customerManager" />	
+	</bean>
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">

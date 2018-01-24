@@ -15,6 +15,10 @@
 	<bean id="bookRoomValidator" class="hotelapp.service.BookRoomValidator">
 		<property name="roomManager" ref="roomManager" />
 	</bean>
+	
+	<bean id="customerInfoValidator" class="hotelapp.service.CustomerInfoValidator">
+		<property name="customerManager" ref="customerManager" />	
+	</bean>
 		
 	<bean id="roomManager" class="hotelapp.service.SimpleRoomManager">
 		<property name="roomDao" ref="roomDao" />

@@ -2,6 +2,7 @@ package hotelapp.web;
 
 import javax.servlet.ServletException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import hotelapp.domain.Customer;
 import hotelapp.service.AddCustomer;
+import hotelapp.service.CustomerInfoValidator;
 import hotelapp.service.CustomerManager;
 
 @Controller
@@ -19,6 +21,9 @@ import hotelapp.service.CustomerManager;
 public class CustomerInfoFormController {
 
 	private CustomerManager customerManager;
+	
+	@Autowired
+	private CustomerInfoValidator customerInfoValidator;
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public String onSubmit(@ModelAttribute("addCustomer")AddCustomer addCustomer,
@@ -29,6 +34,7 @@ public class CustomerInfoFormController {
 		customer.setLastName(addCustomer.getLastName());
 		customer.setEmail(addCustomer.getEmail());
 		customer.setPhoneNumber(addCustomer.getPhoneNumber());
+		customerInfoValidator.validate(addCustomer, result);
 		
 		if (result.hasErrors()) return "customerinfo";
 		
